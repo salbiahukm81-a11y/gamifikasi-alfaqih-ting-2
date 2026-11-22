@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gamifikasi Alfaqih – Pendidikan Islam Tingkatan 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/engine.css?v=1795340478">
+<style>
+.hero{text-align:center;padding:40px 20px 26px}
+.hero .gtitle{font-size:clamp(2.6rem,8vw,5rem)}
+.stats2{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.tab{padding:10px 18px;border-radius:999px;font-weight:800;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:1rem}
+.tab.on{background:linear-gradient(135deg,var(--a),var(--b));color:#0A0F25}
+.sec h2{font-size:1.5rem;margin:26px 4px 12px;font-weight:900;display:flex;align-items:center;gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.gc{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:20px;text-decoration:none;color:var(--txt);min-height:190px;overflow:hidden;
+ background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.gc::before{content:'';position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,var(--ca),transparent 70%);opacity:.55}
+.gc:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 2px var(--ca)}
+.gc .no{font-weight:900;letter-spacing:2px;font-size:.85rem;color:var(--ca)}
+.gc .ic{font-size:2.6rem}
+.gc .gn{font-weight:900;font-size:1.25rem;line-height:1.15}
+.gc .tt{font-weight:600;color:var(--mut);font-size:.95rem;line-height:1.3}
+.gc .pr{margin-top:auto;display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem}
+.gc .pr .bar{flex:1;height:10px}
+.gc .cp{position:absolute;right:12px;top:12px;z-index:2;padding:6px 10px;border-radius:10px;font-weight:800;font-size:.85rem;background:rgba(0,0,0,.45);border:1px solid var(--line);color:var(--txt)}
+.gc .cp:hover{background:var(--ca);color:#0A0F25}
+.gc .chips{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}.gc .chips span{font-size:.72rem;font-weight:800;padding:3px 7px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid var(--line)}
+.gc .pr .bar i{background:linear-gradient(90deg,var(--ca),var(--gold))}
+</style>
+</head>
+<body data-share-title="Gamifikasi Alfaqih – Semua Game Tingkatan 2">
+<div class="wrap">
+ <div class="glass hero">
+  <div class="kicker">🎮 Pendidikan Islam · Tingkatan 2 · KSSM</div>
+  <div class="emblem">🏆</div>
+  <div class="gtitle">Gamifikasi Alfaqih</div>
+  <div class="gsub">28 game · 140 misi · 20 jenis permainan · Nota flash card setiap pelajaran!</div>
+  <div class="stats2"><div class="pill">⭐ <span id="ts">0</span> / 420 bintang</div><div class="pill">✅ <span id="td">0</span> / 28 tamat</div></div>
+ </div>
+ <div class="tabs" id="tabs"></div>
+ <div id="list"></div>
+ <div class="foot"><span class="pw">@powered by alfaqih</span></div>
+</div>
+<script>
+const L=[{"id":"p1","no":1,"bidang":"Al-Quran","title":"Allah Pengurnia Hidayah (Surah Ali 'Imran, ayat 8)","game":"Kompas Hidayah","a":"#34D399","b":"#60A5FA","icon":"🧭","t":["chain","connect","swipe","live","team"]},{"id":"p2","no":2,"bidang":"Al-Quran","title":"Hanya Allah Yang Maha Esa (Surah Ali 'Imran, ayat 18)","game":"Saksi Keesaan","a":"#FBBF24","b":"#A78BFA","icon":"☝️","t":["match","chain","wordsearch","timed","escape"]},{"id":"p3","no":3,"bidang":"Al-Quran","title":"Luasnya Kuasa Allah (Surah Ali 'Imran, ayat 26–27)","game":"Istana Kuasa","a":"#F472B6","b":"#FBBF24","icon":"👑","t":["chain","sort","flash","maze","mystery"]},{"id":"p4","no":4,"bidang":"Al-Quran","title":"Mudahnya Tajwid: Hukum Nun Sakinah, Tanwin dan Mim Sakinah","game":"Makmal Tajwid","a":"#22D3EE","b":"#34D399","icon":"🎙️","t":["sort","pick","crossword","tower","ladder"]},{"id":"p5","no":5,"bidang":"Al-Quran","title":"Manisnya Persaudaraan (Surah Ali 'Imran, ayat 103)","game":"Ikatan Ukhuwah","a":"#F472B6","b":"#22D3EE","icon":"🤝","t":["sort","connect","wheel","collect","levelup"]},{"id":"p6","no":6,"bidang":"Al-Quran","title":"Mengharap Keampunan Allah (Surah Ali 'Imran, ayat 133–136)","game":"Jalan Taubat","a":"#60A5FA","b":"#34D399","icon":"🕊️","t":["order","match","swipe","treasure","boss"]},{"id":"p7","no":7,"bidang":"Al-Quran","title":"Kesantunan Dakwah Rasulullah (Surah Ali 'Imran, ayat 159)","game":"Jejak Santun","a":"#A78BFA","b":"#34D399","icon":"🌸","t":["pick","wordsearch","picture","swipe","tower"]},{"id":"p8","no":8,"bidang":"Al-Quran","title":"Amanah terhadap Harta dan Nyawa (Surah an-Nisa', ayat 29)","game":"Penjaga Amanah","a":"#FBBF24","b":"#F97316","icon":"💰","t":["chain","sort","crossword","timed","wheel"]},{"id":"p9","no":9,"bidang":"Hadis","title":"Mungkar Dicegah Hidup Berkat","game":"Skuad Cegah Mungkar","a":"#F43F5E","b":"#60A5FA","icon":"🛡️","t":["chain","sort","connect","escape","mystery"]},{"id":"p10","no":10,"bidang":"Hadis","title":"Mencari Yang Halal","game":"Radar Halal","a":"#10B981","b":"#FBBF24","icon":"📡","t":["sort","swipe","flash","collect","ladder"]},{"id":"p11","no":11,"bidang":"Akidah","title":"Kekuatan dan Kekuasaan Allah: al-Qadir dan al-Qawiy","game":"Galaksi Kuasa","a":"#8B5CF6","b":"#22D3EE","icon":"🌌","t":["sort","connect","spin","live","maze"]},{"id":"p12","no":12,"bidang":"Akidah","title":"Ketaatan Malaikat","game":"Markas Malaikat","a":"#E0E7FF","b":"#60A5FA","icon":"✨","t":["match","sort","crossword","tower","team"]},{"id":"p13","no":13,"bidang":"Akidah","title":"Panduan daripada Allah (Beriman kepada Kitab)","game":"Perpustakaan Wahyu","a":"#F59E0B","b":"#10B981","icon":"📚","t":["order","connect","picture","swipe","escape"]},{"id":"p14","no":14,"bidang":"Fiqh","title":"Solat Berjemaah Pengikat Hati","game":"Saf Bersatu","a":"#22C55E","b":"#3B82F6","icon":"🕌","t":["pick","order","wordsearch","timed","levelup"]},{"id":"p15","no":15,"bidang":"Fiqh","title":"Solat Jumaat Wadah Kesatuan (Solat Jumaat dan Khutbah Jumaat)","game":"Hari Raya Mingguan","a":"#0EA5E9","b":"#FBBF24","icon":"🕌","t":["sort","spin","crossword","wheel","treasure"]},{"id":"p16","no":16,"bidang":"Fiqh","title":"Tayamum dengan Debu Suci","game":"Misi Debu Suci","a":"#D97706","b":"#22D3EE","icon":"🏜️","t":["order","sort","match","collect","live"]},{"id":"p17","no":17,"bidang":"Fiqh","title":"Rukhsah Anugerah daripada Allah (Menyapu Balutan, Solat Jamak & Qasar, Solat ketika Sakit)","game":"Pusat Rukhsah","a":"#14B8A6","b":"#F472B6","icon":"🩹","t":["spin","pick","order","swipe","ladder"]},{"id":"p18","no":18,"bidang":"Fiqh","title":"Puasa Benteng Diri","game":"Benteng Ramadan","a":"#8B5CF6","b":"#FBBF24","icon":"🌙","t":["sort","pick","connect","timed","mystery"]},{"id":"p19","no":19,"bidang":"Fiqh","title":"Solat Sunat Menampung Kefarduan","game":"Penampung Pahala","a":"#38BDF8","b":"#A78BFA","icon":"🌃","t":["sort","pick","flash","wordsearch","tower"]},{"id":"p20","no":20,"bidang":"Sirah dan Tamadun Islam","title":"Terbitnya Fajar Dakwah","game":"Fajar Makkah","a":"#F97316","b":"#FDE047","icon":"🌅","t":["pick","sort","match","maze","wheel"]},{"id":"p21","no":21,"bidang":"Sirah dan Tamadun Islam","title":"Hijrah Detik Bersejarah","game":"Ekspedisi Hijrah","a":"#EAB308","b":"#0EA5E9","icon":"🐪","t":["order","connect","crossword","escape","collect"]},{"id":"p22","no":22,"bidang":"Sirah dan Tamadun Islam","title":"Kepimpinan Rasulullah di Madinah","game":"Kota Madinah","a":"#22C55E","b":"#EAB308","icon":"🏛️","t":["sort","swipe","flash","treasure","team"]},{"id":"p23","no":23,"bidang":"Sirah dan Tamadun Islam","title":"Wanita Suri Teladan Ummah","game":"Galeri Srikandi","a":"#EC4899","b":"#A78BFA","icon":"👑","t":["spin","pick","wordsearch","live","mystery"]},{"id":"p24","no":24,"bidang":"Akhlak Islamiah","title":"Malu Perisai Iman","game":"Perisai Iman","a":"#F472B6","b":"#60A5FA","icon":"🛡️","t":["sort","swipe","connect","collect","boss"]},{"id":"p25","no":25,"bidang":"Akhlak Islamiah","title":"Menyemai Kasih Menuai Sayang","game":"Taman Mahabbah","a":"#F43F5E","b":"#34D399","icon":"💗","t":["sort","match","picture","levelup","wheel"]},{"id":"p26","no":26,"bidang":"Akhlak Islamiah","title":"Muliakan Ibu Bapa Bahagiakan Keluarga","game":"Rumah Bahagia","a":"#F59E0B","b":"#EC4899","icon":"🏡","t":["sort","swipe","wordsearch","escape","ladder"]},{"id":"p27","no":27,"bidang":"Akhlak Islamiah","title":"Santuni Jiranmu","game":"Kampung Harmoni","a":"#10B981","b":"#F97316","icon":"🏘️","t":["pick","connect","flash","timed","team"]},{"id":"p28","no":28,"bidang":"Akhlak Islamiah","title":"Masjid Destinasiku","game":"Destinasi Masjid","a":"#22D3EE","b":"#10B981","icon":"🕌","t":["sort","swipe","crossword","mystery","levelup"]}];
+const TL={"live": "📡 Live Quiz", "connect": "🔗 Matching", "timed": "⏱️ Timed", "escape": "🔐 Escape Room", "wheel": "🎰 Lucky Wheel", "tower": "🏰 Tower Defense", "collect": "💎 Point Collector", "crossword": "✏️ Crossword", "mystery": "🎁 Mystery Box", "team": "⚔️ Team Battle", "match": "🧠 Memory Match", "swipe": "👍 True/False", "maze": "🌀 Maze", "treasure": "🗺️ Treasure Hunt", "wordsearch": "🔎 Word Search", "spin": "🎡 Spin & Answer", "ladder": "📶 Leaderboard", "flash": "🃏 Flashcard Battle", "picture": "🖼️ Guess Picture", "levelup": "🚀 Level Up", "sort": "🗂️ Asingkan", "order": "🔢 Susun Tertib", "chain": "⛓️ Sambung Ayat", "pick": "🎯 Pilih Tepat", "boss": "👹 Lawan Bos"};
+const B=[['Al-Quran','📖'],['Hadis','📜'],['Akidah','☝️'],['Fiqh','🕋'],['Sirah dan Tamadun Islam','🏛️'],['Akhlak Islamiah','💎']];
+function prog(id){try{const v=JSON.parse(localStorage.getItem('alfaqih_t2_'+id));if(v&&v.st)return{s:v.st.reduce((a,x)=>a+x.stars,0),d:v.st.every(x=>x.stars>0)}}catch(e){}return{s:0,d:false}}
+let cur='Semua';let TS=0,TD=0;
+function render(){TS=0;TD=0;
+ document.getElementById('tabs').innerHTML=['Semua',...B.map(b=>b[0])].map(t=>`<button class="tab ${t===cur?'on':''}" data-t="${t}">${t==='Semua'?'🌐 Semua':B.find(b=>b[0]===t)[1]+' '+t}</button>`).join('');
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{cur=b.dataset.t;render()});
+ document.getElementById('list').innerHTML=B.filter(b=>cur==='Semua'||b[0]===cur).map(([bn,ic])=>`<div class="sec"><h2>${ic} ${bn}</h2><div class="grid3">${L.filter(l=>l.bidang===bn).map(l=>{const p=prog(l.id);return `<a class="gc" href="${l.id}/" style="--ca:${l.a}"><button class="cp" data-id="${l.id}" data-t="P${l.no} · ${l.game}">🔗 Link</button><div class="no">PELAJARAN ${l.no}${p.d?' · ✅ TAMAT':''}</div><div class="ic">${l.icon}</div><div class="gn">${l.game}</div><div class="tt">${l.title}</div><div class="chips">${l.t.map(t=>`<span>${TL[t]}</span>`).join("")}</div><div class="pr"><span>⭐ ${p.s}/15</span><div class="bar"><i style="width:${p.s/15*100}%"></i></div></div></a>`}).join('')}</div></div>`).join('');
+ L.forEach(l=>{const p=prog(l.id);TS+=p.s;TD+=p.d?1:0});document.querySelectorAll('.gc .cp').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const u=new URL(b.dataset.id+'/',location.href).href;window.alfaqihShare?alfaqihShare(u,b.dataset.t):null});document.getElementById('ts').textContent=TS;document.getElementById('td').textContent=TD}
+render();
+</script>
+<script src="assets/share.js?v=1795340478"></script>
+</body>
+</html>
